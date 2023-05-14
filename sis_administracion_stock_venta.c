@@ -5,38 +5,39 @@
 
 
 
-
-
+/*TRABAJO PRACTICO N-1
+Alumnos: Lucas Galeano, Franco Puzzio,"ingresa el nombre del nazi que no me acuerdo"
+-Lucas*/
 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 
-
 int main() {
-	int opc; int quesoStock = 20; int unidad; int ganancia = 0;
+	int opc; int quesoStock = 20; int unidad; int ganancia = 0; int gananciaSemanal = 0; int n = 0;
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
-  printf(" \n");
+    printf(" \n");
 	printf("MENU PRINCIPAL DE CONTROL\n");
 	printf("-------------------------\n");
 	printf("1.Registrar venta/s\n");
 	printf("2.Ver stock disponible\n");
 	printf("3.Generar reporte de ingreso\n");
-	printf("4.salir\n");
+	printf("4.Cerrar el negocio por hoy\n");
+	printf("0.salir\n");
 	printf("Introduzca opcion:");
 	scanf("%d",&opc);
 	
 	
-	while(opc != 4){ //dia
+	while(opc != 0){
 	
 	switch(opc){
 		case 1:
 			
 			printf("Cuanto queso desea comprar?");
-			scanf("%d",&unidad);//variable vender genera error, no continua y no cierra, el SCANF genera problemas (SOLUCION: &&&&&&&&&&&&&&&&&)
-			// para los enteros el scanf lleva %d,&nombreVariable
+			scanf("%d",&unidad);
+			//variable vender genera error, no continua y no cierra, el SCANF genera problemas (SOLUCION: &&&&&&&&&&&&&&&&&)
 			quesoStock = quesoStock - unidad;
 			break;
 			
@@ -50,25 +51,46 @@ int main() {
 			break;
 		
 		case 3:
-			ganancia = unidad*250;
+			/*la variable "ganancia" no sumaba "unidad" sino que se le asignaba el resultado de unidad*precio del producto
+			Se corrigio igualando a "ganancia" por su valor sumado por el producto de (unidad*x)
+
+			NOTA: no podemos calcular la ganancia en "case 3" ya que siempre multiplicara a unidad por 250
+			pienso que habra que o generarla dentro de una funcion o meterla en "case 2" -Lucas*/ 
+		    
+		system("cls");
+			ganancia = ganancia+(unidad*250); //ESTA
+
+			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 			printf("el ingreso total fue de: $ %d\n",ganancia);
-      system("pause");
-      break;
-			
-			
-	//	default:
+			if (n>=7){
+				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+				printf("Las ganancias de la semana fueron de $ %d\n",gananciaSemanal);
+			}
+			system("pause");
+            break;
+        
+		case 4:
+		     //edite la linea 73 de "if(n<7) por if(n<=7) en caso de realizar una compra en el dia 7 y que genere errores, ya que si n = 7 --> n NO es menor a 7" -Lucas
+            if(n<=7){
+			n++;
+			gananciaSemanal = gananciaSemanal + ganancia;
+			ganancia = 0;
+			//ganancia = 0 el nuevo dia se arranca con $ 0 ganancias
+			}
 			
 	}
-  system("cls");
+
+    system("cls");
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
-  printf(" \n");
+    printf(" \n");
 	printf("MENU PRINCIPAL DE CONTROL\n");
 	printf("-------------------------\n");
 	printf("1.Registrar venta/s\n");
 	printf("2.Ver stock disponible\n");
 	printf("3.Generar reporte de ingreso\n");
-	printf("4.salir\n");
+	printf("4.Cerrar el negocio por hoy\n");
+	printf("0.salir\n");
 	printf("Introduzca opcion:");
 	scanf("%d",&opc);	
 
