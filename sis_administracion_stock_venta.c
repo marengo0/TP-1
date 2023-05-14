@@ -70,7 +70,7 @@ int main() {
 	printf("3.Generar reporte de ingreso\n");
 	printf("4.salir\n");
 	printf("Introduzca opcion:");
-	scanf("%d",&opc);
+	scanf("%d",&opc);	
 
 }
 return 0;
