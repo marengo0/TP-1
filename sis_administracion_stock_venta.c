@@ -38,7 +38,8 @@ int main() {
 			
 			printf("Cuanto queso desea comprar?");
 			scanf("%d",&unidad);
-			//variable vender genera error, no continua y no cierra, el SCANF genera problemas (SOLUCION: &&&&&&&&&&&&&&&&&)
+			//La funcion fun_ventas se ingresa en case 1, elimina todo lo que hay en case 1
+
 			quesoStock = quesoStock - unidad;
 			break;
 			
@@ -106,6 +107,7 @@ int main() {
 return 0;
 
 }
+
 int fun_ventas (){
 
 }
