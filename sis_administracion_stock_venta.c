@@ -14,8 +14,9 @@ Alumnos: Lucas Galeano, Franco Puzzio,"ingresa el nombre del nazi que no me acue
 #include <stdlib.h>
 #include <conio.h>
 
+int fun_ventas ();
 int main() {
-	int opc; int quesoStock = 20; int unidad; int ganancia = 0; int gananciaSemanal = 0; int n = 0;
+	int opc; int quesoStock = 20; int unidad; int gananciaDia = 0; int gananciaSemanal = 0; int n = 0;
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
     printf(" \n");
@@ -54,7 +55,6 @@ int main() {
 			printf("\n001|Queso gruyere  |%d|250$\n",quesoStock);
 			printf("\n001|Queso parmesano|%d|250$\n",quesoStock);
 			printf("\n001|Queso azul     |%d|250$\n",quesoStock);
-			printf("\n001|Queso    |%d|250$\n",quesoStock);
 			system("pause");
 			break;
 		
@@ -66,10 +66,10 @@ int main() {
 			pienso que habra que o generarla dentro de una funcion o meterla en "case 2" -Lucas*/ 
 		    
 		system("cls");
-			ganancia = ganancia+(unidad*250); //ESTA
+			gananciaDia = gananciaDia+(unidad*250); //ESTA
 
 			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-			printf("el ingreso total fue de: $ %d\n",ganancia);
+			printf("el ingreso total fue de: $ %d\n",gananciaDia);
 			if (n>=7){
 				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 				printf("Las ganancias de la semana fueron de $ %d\n",gananciaSemanal);
@@ -81,8 +81,8 @@ int main() {
 		     //edite la linea 73 de "if(n<7) por if(n<=7) en caso de realizar una compra en el dia 7 y que genere errores, ya que si n = 7 --> n NO es menor a 7" -Lucas
             if(n<=7){
 			n++;
-			gananciaSemanal = gananciaSemanal + ganancia;
-			ganancia = 0;
+			gananciaSemanal = gananciaSemanal + gananciaDia;
+			gananciaDia = 0;
 			//ganancia = 0 el nuevo dia se arranca con $ 0 ganancias
 			}
 			
@@ -104,5 +104,8 @@ int main() {
 
 }
 return 0;
+
+}
+int fun_ventas (){
 
 }
