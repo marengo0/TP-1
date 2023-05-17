@@ -46,6 +46,14 @@ int main() {
 			printf("LISTA DE PRODUCTOS\n");
 			printf("==================");
 			printf("\nid|nombre producto|stock|precio\n");
+			printf("\n001|Queso cremoso  |%d|250$\n",quesoStock);
+			printf("\n002|Queso muzarella|%d|250$\n",quesoStock);
+			printf("\n001|Queso roquefort|%d|250$\n",quesoStock);
+			printf("\n001|Queso cheddar  |%d|250$\n",quesoStock);
+			printf("\n001|Queso sardo    |%d|250$\n",quesoStock);
+			printf("\n001|Queso gruyere  |%d|250$\n",quesoStock);
+			printf("\n001|Queso parmesano|%d|250$\n",quesoStock);
+			printf("\n001|Queso azul     |%d|250$\n",quesoStock);
 			printf("\n001|Queso    |%d|250$\n",quesoStock);
 			system("pause");
 			break;
