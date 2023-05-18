@@ -6,17 +6,18 @@
 
 
 /*TRABAJO PRACTICO N-1
-Alumnos: Lucas Galeano, Franco Puzzio,"ingresa el nombre del nazi que no me acuerdo"
+Alumnos: Lucas Galeano, Franco Puzzio, Leandro Chanarian
 -Lucas*/
 
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <string.h>
 
-int fun_ventas ();
+int fun_ventas (int);
 int main() {
-	int opc; int quesoStock = 20; int unidad; int gananciaDia = 0; int gananciaSemanal = 0; int n = 0;
+	int opc; int quesoStock = 20; int unidad; int gananciaDia = 0; int gananciaSemanal = 0; int n = 1;
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
     printf(" \n");
@@ -36,11 +37,8 @@ int main() {
 	switch(opc){
 		case 1:
 			
-			printf("Cuanto queso desea comprar?");
-			scanf("%d",&unidad);
 			//La funcion fun_ventas se ingresa en case 1, elimina todo lo que hay en case 1
-
-			quesoStock = quesoStock - unidad;
+			gananciaDia = fun_ventas(gananciaDia);
 			break;
 			
 		case 2:
@@ -50,12 +48,12 @@ int main() {
 			printf("\nid|nombre producto|stock|precio\n");
 			printf("\n001|Queso cremoso  |%d|250$\n",quesoStock);
 			printf("\n002|Queso muzarella|%d|250$\n",quesoStock);
-			printf("\n001|Queso roquefort|%d|250$\n",quesoStock);
-			printf("\n001|Queso cheddar  |%d|250$\n",quesoStock);
-			printf("\n001|Queso sardo    |%d|250$\n",quesoStock);
-			printf("\n001|Queso gruyere  |%d|250$\n",quesoStock);
-			printf("\n001|Queso parmesano|%d|250$\n",quesoStock);
-			printf("\n001|Queso azul     |%d|250$\n",quesoStock);
+			printf("\n003|Queso roquefort|%d|250$\n",quesoStock);
+			printf("\n004|Queso cheddar  |%d|250$\n",quesoStock);
+			printf("\n005|Queso sardo    |%d|250$\n",quesoStock);
+			printf("\n006|Queso gruyere  |%d|250$\n",quesoStock);
+			printf("\n007|Queso parmesano|%d|250$\n",quesoStock);
+			printf("\n008|Queso azul     |%d|250$\n",quesoStock);
 			system("pause");
 			break;
 		
@@ -70,8 +68,9 @@ int main() {
 			gananciaDia = gananciaDia+(unidad*250); //ESTA
 
 			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-			printf("el ingreso total fue de: $ %d\n",gananciaDia);
-			if (n>=7){
+			if(n<=7){
+				printf("el ingreso total fue de: $ %d\n",gananciaDia);
+			}else if (n>=7){
 				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 				printf("Las ganancias de la semana fueron de $ %d\n",gananciaSemanal);
 			}
@@ -85,8 +84,12 @@ int main() {
 			gananciaSemanal = gananciaSemanal + gananciaDia;
 			gananciaDia = 0;
 			//ganancia = 0 el nuevo dia se arranca con $ 0 ganancias
+			}else { //este else discrimina el fin de la semana -Franco
+				gananciaSemanal = 0; 
+				n = 1;
 			}
-			
+		
+
 	}
 
     system("cls");
@@ -108,6 +111,55 @@ return 0;
 
 }
 
-int fun_ventas (){
+int fun_ventas (int ganaDia){
 
+	int codigo; int carrito = 0; int n2 = 0; int unidades = 0;
+	char salir[3]; char ver[3];
+	printf("Ingrese el ID del producto a comprar");
+	scanf("%d",&codigo);
+	while(codigo!=0){
+		switch(codigo){
+			case 001:
+				printf("Cuantas unidades va a comprar?");
+				scanf("%d",&unidades);
+				ganaDia = ganaDia + (unidades*250);
+				n2 = n2 + unidades;
+				carrito = carrito + (unidades*250);
+				break;
+			case 002:
+				printf("Cuantas unidades va a comprar?");
+				scanf("%d",&unidades);
+				ganaDia = ganaDia + (unidades*100);
+				n2 = n2 + unidades;
+				carrito = carrito + (unidades*100);
+				break;
+			}
+	
+
+			printf("Desea seguir comprando? SI/NO");
+			scanf("%s",salir);
+			if (strcmp(salir, "NO") == 0){
+				strcpy(salir, "no");
+				}
+			if(strcmp(salir, "no") == 0){
+				codigo = 0;
+				}
+			
+			
+			printf("Quiere ver su carrito? SI/NO");
+			scanf("%s", ver);
+			if (strcmp(ver, "SI") == 0){
+				strcpy(ver, "si");
+				}
+			if(strcmp(ver, "si") == 0){
+				printf("Cantidad de productos a comprar: %d",n2);
+				printf("Va a costar: $ %d", carrito);
+				system("PAUSE");
+				}
+				
+		}
+	
+	
+	
+	return ganaDia;
 }
