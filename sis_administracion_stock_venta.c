@@ -163,3 +163,5 @@ int fun_ventas (int ganaDia){
 	
 	return ganaDia;
 }
+
+//HOLA SOY FRANCO
