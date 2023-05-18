@@ -39,9 +39,12 @@ int main() {
 			
 			//La funcion fun_ventas se ingresa en case 1, elimina todo lo que hay en case 1
 			gananciaDia = fun_ventas(gananciaDia);
+			gananciaSemanal = gananciaSemanal + gananciaDia;
+			
 			break;
 			
 		case 2:
+		/* actualizar el stock de cada producto, TAREA PENDIENTE */
 			system("cls");
 			printf("LISTA DE PRODUCTOS\n");
 			printf("==================");
@@ -65,27 +68,30 @@ int main() {
 			pienso que habra que o generarla dentro de una funcion o meterla en "case 2" -Lucas*/ 
 		    
 		system("cls");
-			gananciaDia = gananciaDia+(unidad*250); //ESTA
+			
 
-			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-			if(n<=7){
-				printf("el ingreso total fue de: $ %d\n",gananciaDia);
-			}else if (n>=7){
+			
+			if(n<7){
 				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+				printf("el ingreso total fue de: $ %d\n",gananciaDia);
+				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+			}else if (n=7){
+				printf("el ingreso total fue de: $ %d\n",gananciaDia);
 				printf("Las ganancias de la semana fueron de $ %d\n",gananciaSemanal);
 			}
 			system("pause");
             break;
         
 		case 4:
+		    n++;
 		     //edite la linea 73 de "if(n<7) por if(n<=7) en caso de realizar una compra en el dia 7 y que genere errores, ya que si n = 7 --> n NO es menor a 7" -Lucas
             if(n<=7){
-			n++;
-			gananciaSemanal = gananciaSemanal + gananciaDia;
+			/* gananciaSemanal = gananciaSemanal + gananciaDia; */
 			gananciaDia = 0;
 			//ganancia = 0 el nuevo dia se arranca con $ 0 ganancias
-			}else { //este else discrimina el fin de la semana -Franco
-				gananciaSemanal = 0; 
+			}else if (n==8) { //este else discrimina el fin de la semana -Franco
+				gananciaSemanal = 0;
+				gananciaDia = 0;
 				n = 1;
 			}
 		
