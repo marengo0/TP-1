@@ -121,7 +121,7 @@ int fun_ventas (int ganaDia){
 
 	int codigo; int carrito = 0; int n2 = 0; int unidades = 0;
 	char salir[3]; char ver[3];
-	printf("Ingrese el ID del producto a comprar");
+	printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
 	scanf("%d",&codigo);
 	while(codigo!=0){
 		switch(codigo){
@@ -144,6 +144,10 @@ int fun_ventas (int ganaDia){
 
 			printf("Desea seguir comprando? SI/NO");
 			scanf("%s",salir);
+			//transforma las mayusculas en minusculas
+			if (strcmp(salir, "SI") == 0){
+				strcpy(salir, "si");
+				}
 			if (strcmp(salir, "NO") == 0){
 				strcpy(salir, "no");
 				}
@@ -162,7 +166,11 @@ int fun_ventas (int ganaDia){
 				printf("Va a costar: $ %d", carrito);
 				system("PAUSE");
 				}
-				
+			//Si salir = "no" nunca entrará a este if y saldra al menu principal, de otro modo ingresará y preguntara nuevamente
+			if(strcmp(salir, "si") == 0){
+				printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
+	         	scanf("%d",&codigo);
+				}	
 		}
 	
 	
