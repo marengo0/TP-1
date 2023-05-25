@@ -1,4 +1,3 @@
-
 //ventas por dia, muestra informe
 //venta por semana: muestra que quesos se vendieron, y la venta total
 // en 3 al finalizar la semana generar menu para elegir que reporte mostrar: que queso se vendio mas, venta total, que dia se vendio mas
@@ -16,11 +15,13 @@ Alumnos: Lucas Galeano, Franco Puzzio, Leandro Chanarian
 #include <string.h>
 
 int fun_ventas (int);
+void func_mostrar_dia(int);
 int main() {
 	int opc; int quesoStock = 20; int unidad; int gananciaDia = 0; int gananciaSemanal = 0; int n = 1;
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
     printf(" \n");
+    func_mostrar_dia(n);
 	printf("MENU PRINCIPAL DE CONTROL\n");
 	printf("-------------------------\n");
 	printf("1.Registrar venta/s\n");
@@ -39,9 +40,12 @@ int main() {
 			
 			//La funcion fun_ventas se ingresa en case 1, elimina todo lo que hay en case 1
 			gananciaDia = fun_ventas(gananciaDia);
+			gananciaSemanal = gananciaSemanal + gananciaDia;
+			
 			break;
 			
 		case 2:
+		/* actualizar el stock de cada producto, TAREA PENDIENTE */
 			system("cls");
 			printf("LISTA DE PRODUCTOS\n");
 			printf("==================");
@@ -65,27 +69,30 @@ int main() {
 			pienso que habra que o generarla dentro de una funcion o meterla en "case 2" -Lucas*/ 
 		    
 		system("cls");
-			gananciaDia = gananciaDia+(unidad*250); //ESTA
+			
 
-			printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-			if(n<=7){
-				printf("el ingreso total fue de: $ %d\n",gananciaDia);
-			}else if (n>=7){
+			
+			if(n<7){
 				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+				printf("el ingreso total fue de: $ %d\n",gananciaDia);
+				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+			}else if (n=7){
+				printf("el ingreso total fue de: $ %d\n",gananciaDia);
 				printf("Las ganancias de la semana fueron de $ %d\n",gananciaSemanal);
 			}
 			system("pause");
             break;
         
 		case 4:
+		    n++;
 		     //edite la linea 73 de "if(n<7) por if(n<=7) en caso de realizar una compra en el dia 7 y que genere errores, ya que si n = 7 --> n NO es menor a 7" -Lucas
             if(n<=7){
-			n++;
-			gananciaSemanal = gananciaSemanal + gananciaDia;
+			/* gananciaSemanal = gananciaSemanal + gananciaDia; */
 			gananciaDia = 0;
 			//ganancia = 0 el nuevo dia se arranca con $ 0 ganancias
-			}else { //este else discrimina el fin de la semana -Franco
-				gananciaSemanal = 0; 
+			}else if (n==8) { //este else discrimina el fin de la semana -Franco
+				gananciaSemanal = 0;
+				gananciaDia = 0;
 				n = 1;
 			}
 		
@@ -96,6 +103,7 @@ int main() {
 	printf("Sistema de control de stock/venta\n");
 	printf("=================================\n");
     printf(" \n");
+    func_mostrar_dia(n);
 	printf("MENU PRINCIPAL DE CONTROL\n");
 	printf("-------------------------\n");
 	printf("1.Registrar venta/s\n");
@@ -115,7 +123,7 @@ int fun_ventas (int ganaDia){
 
 	int codigo; int carrito = 0; int n2 = 0; int unidades = 0;
 	char salir[3]; char ver[3];
-	printf("Ingrese el ID del producto a comprar");
+	printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
 	scanf("%d",&codigo);
 	while(codigo!=0){
 		switch(codigo){
@@ -138,6 +146,10 @@ int fun_ventas (int ganaDia){
 
 			printf("Desea seguir comprando? SI/NO");
 			scanf("%s",salir);
+			//transforma las mayusculas en minusculas
+			if (strcmp(salir, "SI") == 0){
+				strcpy(salir, "si");
+				}
 			if (strcmp(salir, "NO") == 0){
 				strcpy(salir, "no");
 				}
@@ -156,7 +168,11 @@ int fun_ventas (int ganaDia){
 				printf("Va a costar: $ %d", carrito);
 				system("PAUSE");
 				}
-				
+			//Si salir = "no" nunca entrará a este if y saldra al menu principal, de otro modo ingresará y preguntara nuevamente
+			if(strcmp(salir, "si") == 0){
+				printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
+	         	scanf("%d",&codigo);
+				}	
 		}
 	
 	
@@ -164,4 +180,34 @@ int fun_ventas (int ganaDia){
 	return ganaDia;
 }
 
-//HOLA SOY FRANCO
+
+void func_mostrar_dia(int d){
+	switch(d){
+		case 1:
+			printf("Dia Lunes\n");
+			break;
+		case 2:
+			printf("Dia Martes\n");
+			break;
+		case 3:
+			printf("Dia Miercoles\n");	
+			break;				
+		case 4:
+			printf("Dia Jueves\n");	
+			break;				
+		case 5:
+			printf("Dia Viernes\n");
+			break;						
+		case 6:
+			printf("Dia Sabado\n");	
+			break;					
+		case 7:
+			printf("Dia Domingo\n");
+			break;			
+			
+	}
+}
+
+
+
+
