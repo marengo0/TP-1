@@ -14,6 +14,7 @@ Alumnos: Lucas Galeano, Franco Puzzio, Leandro Chanarian
 #include <conio.h>
 #include <string.h>
 
+
 #define COLOR_RED     "\x1b[31m"
 #define COLOR_GREEN   "\x1b[32m"
 #define COLOR_YELLOW  "\x1b[33m"
@@ -205,13 +206,13 @@ int main() {
 				func_mostrar_dia(n);
 				if(n<7){
 					printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-					printf("El ingreso total fue de:"COLOR_GREEN" $ %d\n"COLOR_RESET,gananciaDia);
+					printf("El ingreso total fue de: "COLOR_GREEN"$ %d\n"COLOR_RESET,gananciaDia);
 					printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 				}else if (n=7){
 					printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-					printf("El ingreso total fue de:"COLOR_GREEN" $ %d\n"COLOR_RESET,gananciaDia);
+					printf("El ingreso total fue de: "COLOR_GREEN"$ %d\n"COLOR_RESET,gananciaDia);
 					printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-					printf("Las ganancias de la semana fueron de"COLOR_GREEN"$ %d\n"COLOR_RESET,gananciaSemanal);
+					printf("Las ganancias de la semana fueron de: "COLOR_GREEN"$ %d\n"COLOR_RESET,gananciaSemanal);
 				}
 				system("pause");
         	    break;
