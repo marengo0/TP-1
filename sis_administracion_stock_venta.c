@@ -14,16 +14,31 @@ Alumnos: Lucas Galeano, Franco Puzzio, Leandro Chanarian
 #include <conio.h>
 #include <string.h>
 
-int fun_ventas (int);
+//int fun_ventas (int);
 void func_mostrar_dia(int);
+//int func_actualiza_stock(int);
+
 
 int main() {
 	int opc;
-	int quesoStock = 0; 
-	int unidad; 
+	int quesoStock = 20; 
+	int cremosoStock = 20;
+	int muzaStock = 20;
+	int roqueStock = 20;
+	int cheddarStock = 20;
+	//int unidad = 1; 
 	int gananciaDia = 0; 
 	int gananciaSemanal = 0; 
 	int n = 1;
+	
+	//VAR compras
+	int codigo;
+	int carrito = 0; 
+	int n2 = 0; 
+	int unidades = 0;
+	char salir[3];
+	char ver[3];
+	
 	
 	
 	printf("Sistema de control de stock/venta\n");
@@ -37,7 +52,7 @@ int main() {
 	printf("3.Generar reporte de ingreso\n");
 	printf("4.Cerrar el negocio por hoy\n");
 	printf("0.salir\n");
-	printf("Introduzca opcion:");
+	printf("Introduzca opcion:\n");
 	scanf("%d",&opc);
 	
 	
@@ -45,34 +60,130 @@ int main() {
 	
 		switch(opc){
 			case 1:
+				
+				printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
+				scanf("%d",&codigo);
+				while(codigo!=0){
+					switch(codigo){
+						case 001:
+								printf("Cuantas unidades va a comprar?\n");
+								scanf("%d",&unidades);
+								if(cremosoStock < unidades){
+									printf("Lo sentimos, no tenemos stock :c\n");
+									printf("Nos quedan: %d unidades de este queso\n", cremosoStock);
+									
+								}else{
+									gananciaDia = gananciaDia + (unidades*250);
+									n2 = n2 + unidades;
+									cremosoStock = cremosoStock - unidades;
+					
+									carrito = carrito + (unidades*250);										
+								}					
+							system("pause");
+							break;
+						case 002:
+							printf("Cuantas unidades va a comprar?\n");
+							scanf("%d",&unidades);
+								if(muzaStock < unidades){
+									printf("Lo sentimos, no tenemos stock :c\n");
+									printf("Nos quedan: %d unidades de este queso\n", muzaStock);	
+								}else{
+									gananciaDia = gananciaDia + (unidades*100);
+									n2 = n2 + unidades;
+									muzaStock = muzaStock - unidades;
+									carrito = carrito + (unidades*100);									
+								}
+
+							break;
+						
+						case 003:
+							printf("Cuantas unidades va a comprar?\n");
+							scanf("%d",&unidades);
+								if(roqueStock < unidades){
+									printf("Lo sentimos, no tenemos stock :c\n");
+									printf("Nos quedan: %d unidades de este queso\n", roqueStock);	
+								}else{
+									gananciaDia = gananciaDia + (unidades*300);
+									n2 = n2 + unidades;
+									roqueStock = roqueStock - unidades;
+									carrito = carrito + (unidades*300);									
+								}							
+	
+							break;
+						
+						case 004:
+							printf("Cuantas unidades va a comprar?\n");
+							scanf("%d",&unidades);
+								if(cheddarStock < unidades){
+									printf("Lo sentimos, no tenemos stock :c\n");
+									printf("Nos quedan: %d unidades de este queso\n", cheddarStock);	
+								}else{
+									gananciaDia = gananciaDia + (unidades*350);
+									n2 = n2 + unidades;
+									cheddarStock = cheddarStock - unidades;
+									carrito = carrito + (unidades*350);									
+								}							
+		
+							break;
+						}				
 			
-				//La funcion fun_ventas se ingresa en case 1, elimina todo lo que hay en case 1
-				gananciaDia = fun_ventas(gananciaDia);
-				gananciaSemanal = gananciaSemanal + gananciaDia;
+						printf("Desea seguir comprando? SI/NO\n");
+						scanf("%s",salir);
+						//transforma las mayusculas en minusculas
+						if (strcmp(salir, "SI") == 0){
+							strcpy(salir, "si");
+							}
+						if (strcmp(salir, "NO") == 0){
+							strcpy(salir, "no");
+							}
+						if(strcmp(salir, "no") == 0){
+							codigo = 0;
+							}
+						
+						
+						printf("Quiere ver su carrito? SI/NO\n");
+						scanf("%s", ver);
+						if (strcmp(ver, "SI") == 0){
+							strcpy(ver, "si");
+							}
+						if(strcmp(ver, "si") == 0){
+							printf("Cantidad de productos a comprar: %d\n",n2);
+							printf("Va a costar: $ %d\n", carrito);
+							system("PAUSE");
+							}
+						//Si salir = "no" nunca entrará a este if y saldra al menu principal, de otro modo ingresará y preguntara nuevamente
+						if(strcmp(salir, "si") == 0){
+							printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
+				         	scanf("%d",&codigo);
+							}	
+					}
+					carrito = 0;
+					n2 = 0;
+					gananciaSemanal = gananciaSemanal + gananciaDia;
+
+					break;
 			
-				break;
-			
-			case 2:
-				if(quesoStock == 0){
+			case 2: //Error rarisimo, si stock es 0 en vez de oprimir el case 2 me envia al case 3.
+					// el codigo de "recargar" stock en case 4 si funciona, y al pasar de dia y oprimir 2 muestra el stock correspondiente/Franco
+					// SOLUCIONADO el break estaba dentro del if y no dentro del case, por lo tanto salteaba al paso 3 /Franco y Lucas
+				if(cremosoStock <= 0 || muzaStock <= 0 || roqueStock <= 0 || cheddarStock <= 0){ // a futuro, comparar cada stock e informar SOLO si no hay stock de dicho producto, mostrar si los demas
+																									// poseen stock /Franco
+					system("cls");
 					printf("Lo sentimos, no tenemos mas stock por hoy :c\n");
+					system("pause");
 				}else if(quesoStock > 0){
-								/* actualizar el stock de cada producto, TAREA PENDIENTE */
 					system("cls");
 					printf("LISTA DE PRODUCTOS\n");
 					printf("==================");
 					printf("\nid|nombre producto|stock|precio\n");
-					printf("\n001|Queso cremoso  |%d|250$\n",quesoStock);
-					printf("\n002|Queso muzarella|%d|250$\n",quesoStock);
-					printf("\n003|Queso roquefort|%d|250$\n",quesoStock);
-					printf("\n004|Queso cheddar  |%d|250$\n",quesoStock);
-					printf("\n005|Queso sardo    |%d|250$\n",quesoStock);
-					printf("\n006|Queso gruyere  |%d|250$\n",quesoStock);
-					printf("\n007|Queso parmesano|%d|250$\n",quesoStock);
-					printf("\n008|Queso azul     |%d|250$\n",quesoStock);
+					printf("\n001|Queso cremoso  |%d|250$\n",cremosoStock);
+					printf("\n002|Queso muzarella|%d|100$\n",muzaStock);
+					printf("\n003|Queso roquefort|%d|300$\n",roqueStock);
+					printf("\n004|Queso cheddar  |%d|350$\n",cheddarStock);
 					system("pause");
-					break;
+					
 				}
-
+				break;
 		
 			case 3:
 			/*la variable "ganancia" no sumaba "unidad" sino que se le asignaba el resultado de unidad*precio del producto
@@ -95,6 +206,7 @@ int main() {
         	    break;
         
 			case 4:
+				gananciaDia = 0;
 			    n++;
 			     //edite la linea 73 de "if(n<7) por if(n<=7) en caso de realizar una compra en el dia 7 y que genere errores, ya que si n = 7 --> n NO es menor a 7" -Lucas
    		        if(n<=7){
@@ -107,9 +219,9 @@ int main() {
 					n = 1;
 				}
 				
-				if(quesoStock < 20){
+				/*/if(quesoStock < 20){//codigo que actualiza el stock si baja de 20 unidades
 					quesoStock = 20;
-				}
+				}*/
 		}
 
         system("cls");
@@ -124,7 +236,7 @@ int main() {
 		printf("3.Generar reporte de ingreso\n");
 		printf("4.Cerrar el negocio por hoy\n");
 		printf("0.salir\n");
-		printf("Introduzca opcion:");
+		printf("Introduzca opcion:\n");
 		scanf("%d",&opc);	
 
 	}
@@ -132,10 +244,19 @@ int main() {
 
 }
 
-int fun_ventas (int ganaDia){
 
-	int codigo; int carrito = 0; int n2 = 0; int unidades = 0;
-	char salir[3]; char ver[3];
+/*int fun_ventas (int ganaDia){
+	
+	
+	
+	int codigo;
+	int carrito = 0; 
+	int n2 = 0; 
+	int unidades = 0;
+	
+	char salir[3];
+	char ver[3];
+	
 	printf("Ingrese el ID del producto a comprar, de otro modo presione 0 para salir al menu principal\n");
 	scanf("%d",&codigo);
 	while(codigo!=0){
@@ -145,6 +266,8 @@ int fun_ventas (int ganaDia){
 				scanf("%d",&unidades);
 				ganaDia = ganaDia + (unidades*250);
 				n2 = n2 + unidades;
+				func_actualiza_stock(unidades);
+
 				carrito = carrito + (unidades*250);
 				break;
 			case 002:
@@ -191,7 +314,7 @@ int fun_ventas (int ganaDia){
 	
 	
 	return ganaDia;
-}
+}*/
 
 
 void func_mostrar_dia(int d){
@@ -221,6 +344,10 @@ void func_mostrar_dia(int d){
 	}
 }
 
-
+/*int func_actualiza_stock(int uni){
+	int stk;
+	stk = stk - uni;
+	return stk;
+}*/
 
 
